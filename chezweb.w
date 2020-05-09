@@ -1,7 +1,8 @@
 % \input graphicx
 
-\input supp-pdf
-\def\epsfbox#1{\hbox{\convertMPtoPDF{#1}{1}{1}}}
+% \input supp-pdf
+\def\epsfbox#1{\hbox{%\convertMPtoPDF{#1}{1}{1}
+}}
 
 \def\ChezWEB{Chez\.{WEB}}
 \def\CWEB{\.{CWEB}}
