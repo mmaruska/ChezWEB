@@ -17,13 +17,13 @@ petite:
 	./weaveit
 
 install:
-	env BINDIR=${BINDIR} \
-	    TEXDIR=${TEXDIR} \
-	    DOCDIR=${DOCDIR} \
-	    LIBDIR=${LIBDIR} \
+	env BINDIR=$(DESTDIR)${BINDIR} \
+	    TEXDIR=$(DESTDIR)${TEXDIR} \
+	    DOCDIR=$(DESTDIR)${DOCDIR} \
+	    LIBDIR=$(DESTDIR)${LIBDIR} \
 	    OWNER=${OWNER} \
 	    GROUP=${GROUP} \
-	  ./installit ${PREFIX}
+	  ./installit $(DESTDIR)${PREFIX}
 
 package: build
 	rm -rf chezweb-${VERSION}-${MACHINE}
