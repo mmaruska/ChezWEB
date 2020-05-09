@@ -1,5 +1,5 @@
 beginfig(1);
-	defaultfont := "bchr8r";
+	defaultfont := "bchr8a";
 	defaultscale := 2;
 	
 	numeric x,y;
