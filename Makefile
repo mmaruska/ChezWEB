@@ -1,21 +1,21 @@
 VERSION=2.0
 
-include config.mk  
+include config.mk
 
 PACKAGE_FILES=README ChangeLog \
     cheztangle chezweave chezweb.pdf doc/cwebman.pdf chezwebmac.tex \
     runtime.so
 
-build: 
+build:
 	./bootstrap
 	./tangleit
 	./weaveit
-	
-petite: 
+
+petite:
 	./bootstrap
 	./tangleit petite
 	./weaveit
-	
+
 install:
 	env BINDIR=${BINDIR} \
 	    TEXDIR=${TEXDIR} \
@@ -35,7 +35,7 @@ package: build
 
 clean:
 	rm -rf runtime.ss runtime.sls cheztangle.ss chezweave.ss chezweb.ss
-	rm -rf runtime.so cheztangle chezweave 
+	rm -rf runtime.so cheztangle chezweave
 	rm -rf chezweb.{1,2,3,4,5}
 	rm -rf chezweb.tex chezweb.pdf doc/cwebman.pdf doc/cwebman.log
 	rm -rf chezweb.{idx,log,mpx,scn,toc}
