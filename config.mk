@@ -1,0 +1,9 @@
+PREFIX=/usr/
+MACHINE=ta6le
+# TEXDIR=/usr/share/texmf
+TEXDIR=/usr/share/texlive/texmf-dist/
+DOCDIR=/usr/share/doc/chezweb-${VERSION}
+BINDIR=${PREFIX}/bin
+LIBDIR=${PREFIX}/lib64/chezweb
+OWNER=root
+GROUP=root
