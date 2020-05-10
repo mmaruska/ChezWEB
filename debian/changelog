@@ -1,0 +1,224 @@
+chez-web (0.1.0) unstable; urgency=medium
+
+  [ arcfide ]
+  * Initial check-in for some simple starters.
+  * Start with the CWEB macros.
+  * Update with a mostly working version. ChezTANGLE works, but Weaving still has some bugs in it.
+  * Finish up the documentation on cheztangle.czw.
+  * Get the chunks working in the output. Fix some missing elements in the cheztangle.ss bootstrap file.
+  * Add my own version of the macros by Knuth. These are very limited at the moment, but it's all I have and I don't have time to go through the macros by Knuth.
+  * Make sure that chezweave puts the ending \bye command in there.
+  * Clean up some things. I want to keep the Knuth macros around for reference. Also, I don't need chezweb.czw around for reference anymore.
+  * Improve the chezwebmac.tex file so that the printing is now verbatim based and actually works. Namely, lines and spaces are obeyed. I am using a slightly modified version of the verbatim.mac macros. I adjust them so that \, {, and } still have their normal meanings, which means that commands will still work. This does mean that some care will have to be taken with certain cases, but that's alright. I can handle that when I improve the pretty printer.
+  * Try to get the library stuff working. It seems to go alright, but there is a problem with multiple definitions with the normal czw file. I am not sure how I can avoid this, though, so we might have to stick with having a bootstrap version as the main version. :-(
+  * I've finally added a library form @l that works. At least, it apparently works. :-) I've also updated the files so that formatting mostly works as well. There are still some things that don't work as well as they should. Namely, there is no plus sign added to repeat names, and there is nothing to escape out the strange characters on the chunk names, like >.
+  * Throw in some documentation for this project and see if it flies. :-)
+  * Let's add a packaging target as well.
+  * Install the macro file as well.
+  * Fix some bugs in the makefile, some formatting issues in chezweave, and some naming issues in cheztangle.
+  * Don't clean before build for install.
+  * Make sure that cheztangle works with libraries.
+  * Update to version 8.0 of Chez Scheme.
+  * Improve docs.
+  * Fix a problem if the same identifier is used in exports and captures.
+  * Don't allow mathmode in verbatim.
+  * Improve the reliability of cheztangle in defining section.
+  * It looks like I am going to need to put the captures into the call site as well as at the definition site for sections. Bleh. Oh well, in practice this is actually a good thing.
+  * Yes, it really does work now.
+  * Try to improve the formatting of the exports. I would really prefer to have a table based rendering, but I don't have the time for that right now.
+  * Add a TODO file to keep track of things.
+  * Fix some wrapping and naming bugs.
+  * Make the exports of a library section be a two column table. I really need to dynamically choose how many columns to use, but that's for another day.
+  * Update the TODO to reflect the better export formatting now.
+  * Make the exports, imports, and captures show when a chunk is defined.
+  * Use a smaller font for the EIC stuff.
+  * Add the section numbers to chunk references.
+  * Update the TODO.
+  * Enable the TOC capability. At the moment, the creater of the ChezWEB document will put the TOC wherever he wants.
+  * Update the version to 1.0 and drop the cheztangle.czw file. I don't think it's particularly helpful and it's hard to keep up-to-date.
+  * Update the README with a few things to make sure it doesn't suggest things that can't be done.
+  * Update the versions of the cheztangle and chezweave files.
+  * Remove cheztangle.czw from the package since it's no longer in the distribution.
+  * Add some information about how to obtain ChezWEB.
+  * Improve the module weaving so that it handles the whole of the module syntax.
+  * Improve the formatting of Exports, captures, and imports in chunks.
+  * Some initial scratches into the chezWEB User's Guide. The beginnings of a prologue.
+  * Update some of the variables and improve the layout a bit.
+  * Improve the library handling to support some constructs that caused the previous mechanism to bomb out on.
+  * Major sanitization work to make sure that special characters can work together correctly.
+  * Allow the lists of exports and imports to dynamically switch to a table from a normal ragged paragraph whenever they cross a certain threshold of items.
+  * Miscellaneous formatting improvements. Use a dotfill in the contents and make sure that the indenting of code starts at the first of the line rather than at some random indent.
+  * This adjusts the way we handle the captures and the exports so that we can handle the implicit exports correctly, as well as allowing us to make sure that nested sets of exports of the same identifier don't result in strange things. This occurs whenever you reexport an identifier from a chunk. It's possible that the wraps won't go write, and then you just can't find things. This makes sure that the wraps on the inside link up and then links those wraps with the ones on the outside, rather than doing a fully blatant wrap like we were doing before.
+  * Fix the various capture problems without the associated problems of the previous solution. I still do the implicit wrapping, which leads to weirdness, but instead of trying to fix it, I allow for it as a "feature" and instead provide another derivative of @<< that allows me to wrap the exports as I see fit. In other words, in cases where you might have @< but you want the exports to go out another level and be re-exported, you would instead use something like @<< and pass a proper identifier that has the wrapping you want. This would normally be one of the exports of the enclosing chunk. It's clumsy, but it is effective. The main question now is how to make this more elegant.
+  * Use named and optional exports, imports, and captures for named chunks. This is a rather big change that lets you write without having to specify all of them in funny little nulls and the like.
+  * Bring the same updates (named exports, imports, and captures) to the Weaving parts of the program.
+  * Bump up the Version number and make some compression adjustments for my new build environment (which is actually older).
+  * Update the Makefile to use XZ again.
+  * Improved formatting of library exports. Improved the handling of exports threading through to the outside with the rewrapping of @<< based on the position rather than passing an explicit identifier for wrapping.
+  * This fixes the wraps on the macros to make sure that they work the way we intend.
+  * Adjust the bin-package target to include the chezwebmac.tex file.
+  * Improved documentation and included a draft of the new guide. The documentation now includes much more detailed instructions for installing ChezWEB.
+  * Further improve the README with a little tweak of organization and make sure that the README is included in the bin package.
+  * I suppose that it also wouldn't hurt to put the Makefile in there too, as the installation should work so long as the boot files are there.
+  * Improve how we clean up the directory.
+  * Make the package target overwrite existing tarballs.
+  * Remove the Beta notice.
+  * Allow the environment variables CHEZWEBMAXELEMS and CHEZWEBLISTCOLUMNS to control the limits of the simple elements and the number of columns that are generated for output in ChezWEB.
+  * Add a ChangeLog file.
+  * Update the ChangeLog with missing elements.
+  * Make some reliability improvements and bump up the version to the next revision, alpha.
+  * Fix the way that @<< works so that the threading goes through even with nested chunks. I don't know of an easier way to do this except to use a code walk, which is what I'm doing right now.
+  * Remove the tracing.
+  * Replace the TextMaker document with a TeX document, again. I can not seem to make up my mind, can I?
+  * Just a little rearranging.
+  * A good first version of the ChezWEB User's Guide.
+  * Improve the handling of string escapes in the woven output. Now things work.
+  * Make some important improvements to the way threading works.  Namely, make sure that using @chunk-ref/thread instead of @<< won't mess up the way the new threading works.
+  * Version number bump.
+  * Get the changelog up to date with the latest changes.
+  * Add the user's guide support.
+  * I have made some updates to fix some minor bugs, but I've also greatly improved the formatting and handling of the quote forms to make sure that they work better. This allows us to work with SXML files and the like which use @.
+  * Do some refactoring and cleaning up of the evaluator and also remove some of the debugging stuff for the moment.
+  * Update things to the new version 8.1 of Chez Scheme.
+  * Update the ChangeLog
+  * We want to make sure that embedded quotes do what they were intended to do and that they are rendered correctly.
+  * Update to 1.2.3.
+  * Make things work for Version 8.0 as well as Version 8.1.
+  * Fix some typos that were reported by Carlo Angiuli.
+  * Update to 8.2.
+  * Enable arbitrary code execution for side-effects.
+  * Enable more support for Petite Chez Scheme.
+  * Whooops.
+  * I think I have successfully eliminated the need for the funny ... kludge inside of named chunks that have syntax definitions in them that also use ellipses. Let's hope!
+  * We can fix the Petite script so that it doesn't exit on a failure.
+  * Let's see if we can make this work the good old fashioned way.
+  * The script should pass its arguments through.
+  * Improve and fix the makefile.
+  * The previous commit fixes an issue in here.
+  * Make improvements to the guide, with a new section dealing with the ellipses pattern issue and documenting the evaluator.
+  * Update the ChangeLog.
+  * Improve the README and update the Makefile to make sure that it has the petite directory in the source package.
+  * @e is meant to appear in definition contexts.
+  * Split out the parameters into their own library so that they may be used inside of @e forms for changing the list and column settings.
+  * The need for a real pretty printer is larger eliminated because of the @e form.
+  * Fix the handling of ellipses in the value case as well as the definition case of @>.
+  * Improve the flexibility of the make file a bit.
+  * Update to 8.3
+  * Move a few exports around for easier reading.
+  * Experimental branch for doing the next version of ChezWEB.
+  * Add in a bunch of changes including the runtime code and a start on the tangle-file procedure.
+  * Finish up the rest of the section for adding and constructing the hashtables for chunks. I've also rearranged some elements that just did not make sense together, lifting the runtime into its own section, because it really deserves its own section.
+  * Finish up the work on Tangling a WEB and make the tokenizer ignore the comment control code. That should be everything I need to get a reasonable bootstrap program working. Time to try it out.
+  * Do a manual tangle and get the bootstrap file up to date. Let's hope this works!
+  * Make sure that we use Chez Scheme mode.
+  * This fixes all of the problems with the last commit so that bootstrap.ss now works fully on chezweb.w and ChezWEB is now able to tangle itself!
+  * The boostrap.ss file should be executable.
+  * Add in some scripts to tangle and bootstrap the code automatically.
+  * Some miscellaneous formatting adjustments on the TODO file.
+  * Add something to weave the files. Right now, it doesn't do much, except for rendering and renaming the chezweb graphics.
+  * Add an implementation of weaving.
+  * Fix some initial build problems and bring the build system up to date with the fact that there is a chezweave now, too.
+  * Get a few more type errors fixed. Now ChezWEB can weave itself. It is having a bit of trouble with the eplain macros conflicting with the core macros, but I'm sure we can fix that somehow.
+  * I've made a number of adjustments to make sure that the formatting is working correctly. Additionally, I've made the script functions a bit more reliable for building. The main issues have to do with making sure that the right TeX is generated. At the moment, it is mostly good, but there are still a few pieces that are not working and a few rendering artifacts in the final TeX document, along with some grouping errors of some kind that I need to hunt down.
+  * We want to make sure to TeX the woven file when weaving.
+  * We would like to use a default paper size of letter.
+  * Cleanup the code and improve the formatting a bit, make it more consistent, and the like. The ChezWEB system is now able to weave itself completely, except that it fails with regards to the index and the section names, which is what we need next.
+  * Add explicit indexing support. This requires a bit of changes to a bunch of elements of the code, including the tangling operations, so I had to also update the bootstrapper. I've taken the liberty of cleaning up a few sections as well.
+  * Update the TODO.
+  * Remove the old elements that I don't need anymore.
+  * Add a copyright and some formatting enhancements.
+  * Incorporate things from the user's guide in. Soon, we will not need a separate document for the User's Guide.
+  * An initial commit with some effort at getting the section cross-referencing off the ground. It doesn't really do much right now, but the basic infrastructure is there. The main thing is that only the chunk references are expanded, and the sections database is not used to actually generate the section name database.
+  * Bring the bootstrapper in line with the latest code.
+  * Make sure to sort the section numbers.
+  * Make the first move to convert things to the new syntax for chunk references. Get the bootstrap handling them. Right now weaving is still broken because of texification, but tangling works.
+  * Improve the overall flow of the slurping so that the program cod is done mostly in the right way now. The Weaver still isn't giving us what we want for the other stuff, but that's a minor thing that we'll get worked out here shortly.
+  * Some cleanup and get the formatting of the chunk references mostly correct.
+  * I forgot to keep looping. Whoops.
+  * Enable the section name index. Define a number of procedures for handling the cross-referencing. These are not used anywhere yet.
+  * Enable the printing of cross references in the main chunk definitions.
+  * Improve the documentation and update the TODO.
+  * Enable the plus sign for sections that are concatenations or extensions of previously mentioned sections.
+  * Clean up the formatting, which required ensuring that we properly encode the tangled chunk names.
+  * Improve the formatting by adding one of the missing diagrams and typewriter fonting (great grammar, that) the list of macros in the Weaving section.
+  * Fill in more documentation, including a couple more diagrams and the cheat sheet.
+  * Improve the output of the chezweave and cheztangle programs, provide an intsaller that allows the programs to be installed easily, and rearrange the documentation to remove two needless sections and merge in things a bit better. The overall hierarchy is now cleaner, and the program looks nicer. You also get version numbers and other helpful information when you are running either chezweave or cheztangle.
+  * Enable some implicit indexing. Also improve the formatting of the code in certain places by removing excess whitespace where appropriate. We have also made the installer a little less errorprone relating to TeX directories.
+  * Cleanup some of the stuff and remove user-level documentation, which should be in the guide instead of in the program.
+  * Implement support for the include code @i.
+  * Whoops, I need to remove the I from the other case.
+  * We don't need the makefile anymore.
+  * Add a graphical representation of the file system dependencies and the layout generated from chezweb.w to the ChezWEB System section.
+  * Improve the system section, so that it is mostly correct now, and fix some typos.
+  * Clean up and proofing some more. I think sections 1 through 13 are good now.
+  * Do some proofing on sections up through page 12. This means that everything up to the section on ``Processing code bodies'' should be pretty good now. Or at least good enough for release, though I am specifically not attacking the rendering problems with vertical bars in these proofs.
+  * This one brings the work through page 15 and the start of the ``Tangling a WEB'' section.
+  * Do a general proof-reading over the section on tangling webs. I think that section is mostly good now. I made some code changes as well as documentation changes, but they should be a no-op in terms of actual semantics.
+  * Print some nice section numbers when writing out the section index.
+  * Improve the formatting of the output of ChezWEB, allowing empty section bodies. Additionally, add some more verbose output when weaving things, makes things easier to debug if there are errors when weaving.
+  * Improve the formatting so that special characters in captures and exports does not ruin everything.
+  * Some rearranging of code and some minor changes.
+  * Adjust the way that we render chunks inside of the encoder.
+  * Adjust the way that pretty printing is done, and eliminate the need to use the verbatim mode inside of our code. Yes, this is good.
+
+  [ Aaron W. Hsu ]
+  * Bootstrap.ss needs to be executable.
+  * Improve help for installit
+  * Update README and add Makefile for v2.0 release This commit updates the README for the latest features of 2.0 and adds a makefile to ease the building, though people who want to use Petite will still need to read the scripts to get the things they want.  Using Petite easily will just have to come later.
+  * Update TODO list for 2.1 Update the TODO list to reflect changes to 2.0 and give some ideas of things that need to be in 2.1.
+  * Replace the old manual The old manual was not relevant and did not really help enough people. It was a good first start, but it is better to start with a base off the CWEB manual and go from there.  Unfortunately, I do not have time to work on the manual right now, so I am just going to leave it in here, and let someone else do that work, maybe me, later.
+  * Rename guide directory. Things should move to a more standard name.
+  * Link cwebman into build We want to include the cwebman.pdf as part of the documentation for our packages, so we should make sure that weaveit builds the manual and that installit installs it together with the chezweb.pdf document.
+  * Proof-read finished for v2.0 This is the final proof-read of the ChezWEB document before the v2.0 release.  I've fixed a couple of bugs that were recently introduced, as well as cleaned up the documentation and the like. I think we're nearly there!
+  * Better petite support You know, I don't like the idea that people are going to see the first version 2.x series and they will likely have petite, and not be able to use it without editing scripts.  Let's fix that here.  Basically, now the tangleit script knows how to set things up for petite if you give it 'petite' as its first argument.  Additionally, there is a petite target for the makefile for those who wish to build with petite. As a final concession, the installit script will now check whether it can install the runtime.so file before trying to install it, since it will not exist if the user used petite instead of scheme to build the system.  It will also install the source copy of runtime for those who don't have the compiler.
+  * Get things working with Petite This change makes changes to the scripts and to the way that we load code to enable people who only have petite to use the system.  Namely, it recognizes the CHEZWEBHOME environment variable so that an user can point to the runtime.ss and chezweb.ss files that would normally be compiled into the system, but which are now also distributed as part of the LIBDIR contents.  I don't particularly like this solution as it greatly increases the number of files that need to be installed, but it does have the advantage of working with Petite.  Notably, this does not change what is required for the compiled version. You still only need the two compiled scripts and the TeX file to actually use ChezWEB if it is compiled.
+  * We have some more TODOs that we can eliminate
+  * Fix a typo in README
+  * Add a CheckList This is a checklist that I can use to remind myself of what I need to do before making any release, so that I reduce the chance of having to release patch versions quickly thereafter.
+  * I think I should be using [ instead of [[ here.
+  * Gah, more old school bourne shell for me.
+  * Trailing newline
+  * Make sure to provide a 'clean' target.
+  * Update the ChangeLog It's hard to even connect the old version to the new one it is so much better.
+  * Make a note about the MetaPost system requirements.
+  * Add note about how to work with the binary packages.
+  * Add a package target for the Makefile
+  * Add in the website These are the basic pages for the project landing page.
+  * Fix bug in tangling empty sections Somehow this bug slipped through, but if you tangle an unstarred section that has no text body, version 2.0 will die on you.  This fixes that bug. I have also added some more documentation and cleaned up a bit of things, including throwing in some index entries where I needed them.
+  * Keep newlines between chunks This fixes an issue where we strip off too much whitespace from the files.  This adds back one newline between each of the concatenated chunks when tangling to help with things.  This only affects tangling, and it does not guarantee whitespace preservation, only that each line will continue to be a line on its own.
+  * Choose first section when encoding, fixes issue #5 Make sure that the lowest or first section number listed is the one used when we encode a chunk reference, rather than just the first one in the list.  Fixes issue #5.
+  * Address self-referencing cross references, fixes #4.
+  * Strip whitespace from starred after scraping, fixes #6.
+  * Adjust the defaults for the Makefile.
+  * Fix an issue with undefined section names
+  * Improve path handling for the petite case. Now, if you know that the path to the chezweave or cheztangle scripts written for the petite target will also contain the chezweb.ss file, then it is not necessary to define CHEZWEBHOME.  This allows for in place builds.  When doing a general install it is still necessary to make sure that CHEZWEBHOME is set for petite builds.
+  * Whitespace fix and remove debugging statement.
+  * Use SOURCE-DIRECTORIES for runtime.ss
+  * Remove CHEZWEBHOME notice This causes problems with using ChezWEB inplace sometimes if bundled with other software.  Not to mention, with new changes, it is not always necessary.
+  * Use pdfTeX instead of XeTeX Despite some benefits to using XeTeX, we get better results by using pdfTeX.
+  * Fixes #13
+  * Add something for IU deployments
+  * Use a soft link instead
+  * Rename typo, whoops.
+  * Add a start for a real pretty printer
+  * Use a config file
+  * Add the config.mk file
+  * Update to allow group and user changes
+  * Update to move the changes to the config.mk.template file instead of the config.mk file
+  * Change [[ to [
+  * Fix up some formatting problems
+  * Update for Current State of Things
+
+  [ Jason Felice ]
+  * Ignore intermediate files
+  * Fix grammar issue
+
+  [ Michal Maruska ]
+  * Build documentation without supp-pdf.tex
+  * Change the font used to an existing one.
+  * drop spaces
+  * Install into DESTDIR
+  * Add debianization
+  * release
+
+ -- Michal Maruska <mmaruska@gmail.com>  Sun, 10 May 2020 07:12:58 +0200
