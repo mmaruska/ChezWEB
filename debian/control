@@ -1,0 +1,12 @@
+Source: chez-web
+Section: misc
+Priority: extra
+Maintainer: Michal Maruska <mmaruska@gmail.com>
+Build-depends: texlive-metapost, texlive-fonts-extra, texlive-extra-utils
+Standards-Version: 3.7.2
+
+Package: chez-web
+Version: 0.1.0
+Architecture: all
+Depends: chezscheme
+Description: WEB tool to use with scheme scripts
